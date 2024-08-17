@@ -72,7 +72,7 @@ const SingleProducts = () => {
                     setImages(duplicatedImages);
                     setActiveImage(duplicatedImages[0]);
 
-                    // Filter related products based on category overlap
+                    // Filter related products based on category
                     const related = products.filter(
                         (p) =>
                             p.category.some((cat) =>
@@ -246,7 +246,7 @@ const SingleProducts = () => {
                                     </button>
                                 </div>
                                 <button
-                                    className="bg-green-600 text-white text-[14px] font-bold py-3 px-8 rounded-[8px
+                                    className="bg-green-600 text-white text-[14px] font-bold py-3 px-8 rounded-[8px]
                                     h-full"
                                     onClick={handleAddToCart}
                                 >

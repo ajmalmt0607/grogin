@@ -1,5 +1,4 @@
 import React from "react";
-
 import Offer from "./_components/Offer";
 import OrdersHeader from "./_components/OrdersHeader";
 import Navbar from "./_components/Navbar";

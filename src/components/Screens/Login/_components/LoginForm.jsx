@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../../../features/auth/authSlice"; // Adjust the import path
+import { loginUser } from "../../../../features/auth/authSlice";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Ensure react-router-dom is installed
+import { useNavigate } from "react-router-dom";
 
-const authUrl = "https://fakestoreapi.com/auth/login"; // Update the URL accordingly
+const authUrl = "https://fakestoreapi.com/auth/login";
 
 const LoginForm = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate(); // Ensure this is used correctly
+    const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -21,15 +21,12 @@ const LoginForm = () => {
             const data = response.data;
 
             if (data.token) {
-                dispatch(loginUser({ user: { username }, jwt: data.token })); // Dispatch login action
-
-                // Navigate to home page only after login success
-                navigate("/"); // Make sure this path matches your routing setup
+                dispatch(loginUser({ user: { username }, jwt: data.token }));
+                navigate("/");
             } else {
                 setFormError("Login failed. Please check your credentials.");
             }
         } catch (error) {
-            // Check if the error is from the response
             if (error.response && error.response.data) {
                 setFormError(
                     error.response.data.error ||

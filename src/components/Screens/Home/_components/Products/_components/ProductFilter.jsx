@@ -21,7 +21,7 @@ const brands = ["Fresh"];
 const statuses = ["In Stock", "On Sale"];
 
 const MIN = 0;
-const MAX = 100; // Adjust this value as per your requirements
+const MAX = 100;
 
 const ProductFilter = ({
     selectedCategories,

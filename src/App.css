@@ -7,10 +7,10 @@
     object-position: right 75%;
 }
 .header-container {
-    position: -webkit-sticky; /* For Safari */
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 1000; /* Ensure the header is on top of other content */
-    background-color: white; /* Optional: background color to make sure content below is not visible through */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: shadow for better separation */
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
