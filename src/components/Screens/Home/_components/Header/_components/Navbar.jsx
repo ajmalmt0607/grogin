@@ -1,38 +1,33 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 import {
     FiUser,
     FiHeart,
     FiShoppingCart,
     FiSearch,
-    FiX, // Close icon
+    FiX,
     FiMapPin,
 } from "react-icons/fi";
+import { FaCircleUser } from "react-icons/fa6";
 import logo from "../../../../../../assets/logo-grogin.png";
+import { logoutUser } from "../../../../../../features/auth/authSlice"; // Import your logout action
 
 const Navbar = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [isSearching, setIsSearching] = useState(false);
-    const [searchDisabled, setSearchDisabled] = useState(false); // New state for disabling search
-    const [message, setMessage] = useState(""); // New state for message
+    const [searchDisabled, setSearchDisabled] = useState(false);
+    const [message, setMessage] = useState("");
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown
     const cartItems = useSelector((state) => state.cart);
     const wishlistItems = useSelector((state) => state.wishlist);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation();
 
     const totalCartQuantity = cartItems.reduce(
         (total, item) => total + (item.quantity || 0),
         0
     );
-
-    useEffect(() => {
-        const queryParams = new URLSearchParams(location.search);
-        const search = queryParams.get("search") || "";
-        setSearchQuery(search);
-        setIsSearching(!!search);
-        setSearchDisabled(!!search); // Disable search input if there's a search query
-    }, [location]);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -44,7 +39,7 @@ const Navbar = () => {
                 return;
             }
             setIsSearching(true);
-            setSearchDisabled(true); // Disable search input
+            setSearchDisabled(true);
             navigate(`/?search=${encodeURIComponent(searchQuery.trim())}`);
         }
     };
@@ -52,13 +47,18 @@ const Navbar = () => {
     const handleClearSearch = () => {
         setSearchQuery("");
         setIsSearching(false);
-        setSearchDisabled(false); // Enable search input
-        setMessage(""); // Clear any existing message
-        navigate(`/`); // Fetch all products by navigating to the homepage without search
+        setSearchDisabled(false);
+        setMessage("");
+        navigate(`/`);
+    };
+
+    const handleLogout = () => {
+        dispatch(logoutUser());
+        navigate("/"); // Redirect to login page after logout
     };
 
     return (
-        <nav className="flex items-center justify-between xs:px-40 px-20 py-2 border-b bg-white shadow">
+        <nav className="flex items-center relative justify-between xs:px-40 px-20 py-2 border-b bg-white shadow">
             <div className="flex items-center space-x-4">
                 <Link to={"/"}>
                     <img
@@ -82,10 +82,14 @@ const Navbar = () => {
                     <input
                         type="text"
                         placeholder="Search for products, categories or brands..."
-                        className="w-full text-[14px] px-4 py-2 border border-gray-300 rounded-[8px] focus:outline-none focus:border-blue-500 bg-slate-100"
+                        className={`w-full text-[14px] px-4 py-2 ${
+                            searchDisabled
+                                ? "border-red-600 border-[2px]"
+                                : "border-gray-300 border"
+                        } rounded-[8px] focus:outline-none focus:border-blue-500 bg-slate-100`}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        disabled={searchDisabled} // Disable input if needed
+                        disabled={searchDisabled}
                     />
                     {isSearching ? (
                         <button
@@ -112,11 +116,37 @@ const Navbar = () => {
                 )}
             </div>
             <div className="flex items-center space-x-8">
-                <div className="flex flex-col items-center space-x-1">
-                    <FiUser className="text-black" fontSize={"26px"} />
-                    <span className="text-black text-[12px] font-medium">
-                        Joseph
-                    </span>
+                <div className=" flex flex-col items-center space-x-1">
+                    <div
+                        className="flex flex-col items-center cursor-pointer"
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)} // Toggle dropdown
+                    >
+                        <FiUser className="text-black" fontSize={"26px"} />
+                        <span className="text-black text-[12px] font-medium">
+                            Joseph
+                        </span>
+                    </div>
+                    {isDropdownOpen && (
+                        <div className="absolute top-full xs:right-32 right-11 rounded-lg bg-violet-300 w-60 p-3 border border-gray-300 shadow-lg">
+                            <div className="flex items-center space-x-2 mb-2">
+                                <FaCircleUser
+                                    className="text-black"
+                                    fontSize={"24px"}
+                                />
+                                <span className="text-black text-[14px] font-semibold">
+                                    Joseph Stalin
+                                </span>
+                            </div>
+                            <div className="w-full flex justify-end">
+                                <button
+                                    onClick={handleLogout}
+                                    className="py-2 text-[14px] font-medium px-4 text-white w-[76px] bg-violet-600 hover:bg-red-600 rounded"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <Link
                     to="/wishlist"

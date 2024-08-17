@@ -29,9 +29,7 @@ const Product = ({ product, selectedIcon }) => {
     return (
         <div
             className={`border relative ${
-                selectedIcon === "list"
-                    ? "flex w-[640px] justify-between p-4"
-                    : "p-2"
+                selectedIcon === "list" ? "flex justify-between p-4" : "p-2"
             }`}
         >
             <Link
@@ -69,7 +67,11 @@ const Product = ({ product, selectedIcon }) => {
                             />
                         ))}
                     </div>
-                    <div className="flex items-center mt-2">
+                    <div
+                        className={`flex ${
+                            selectedIcon === "list" ? "hidden" : ""
+                        } items-center mt-2`}
+                    >
                         <span className="text-[22px] font-bold text-red-600 mr-3">
                             {product.price}
                         </span>
@@ -91,6 +93,21 @@ const Product = ({ product, selectedIcon }) => {
             >
                 <FaHeart />
             </span>
+
+            {/* conditional rendering of price tag on list */}
+
+            <div
+                className={`flex ${
+                    selectedIcon === "list" ? "" : "hidden"
+                } items-center mt-2`}
+            >
+                <span className="text-[22px] font-bold text-red-600 mr-3">
+                    {product.price}
+                </span>
+                <span className="text-[16px] font-semibold line-through text-black">
+                    {product.oldPrice}
+                </span>
+            </div>
             <div className="flex items-center mt-1">
                 {/* Cart Button */}
                 <button

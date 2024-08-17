@@ -1,23 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../../features/auth/authSlice"; // Adjust the import path
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Ensure react-router-dom is installed
+
+const authUrl = "https://fakestoreapi.com/auth/login"; // Update the URL accordingly
 
 const LoginForm = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate(); // Ensure this is used correctly
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [formError, setFormError] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(authUrl, { username, password });
+            const data = response.data;
+
+            if (data.token) {
+                dispatch(loginUser({ user: { username }, jwt: data.token })); // Dispatch login action
+
+                // Navigate to home page only after login success
+                navigate("/"); // Make sure this path matches your routing setup
+            } else {
+                setFormError("Login failed. Please check your credentials.");
+            }
+        } catch (error) {
+            // Check if the error is from the response
+            if (error.response && error.response.data) {
+                setFormError(
+                    error.response.data.error ||
+                        "Login failed. Please check your credentials."
+                );
+            } else {
+                setFormError("An unexpected error occurred. Please try again.");
+            }
+        }
+    };
+
     return (
         <div className="flex flex-col justify-center h-screen max-w-md mx-auto p-8 bg-white">
             <h2 className="text-3xl font-bold mb-4">WELCOME BACK</h2>
             <p className="mb-8">Welcome back! Please enter your details.</p>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                     <label
                         className="block text-sm font-medium mb-2"
-                        htmlFor="email"
+                        htmlFor="username"
                     >
-                        Email
+                        Username
                     </label>
                     <input
-                        type="email"
-                        id="email"
+                        type="text"
+                        id="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         className="w-full p-3 border rounded"
-                        placeholder="Enter your email"
+                        placeholder="Enter your username"
                     />
                 </div>
                 <div className="mb-4">
@@ -30,6 +72,8 @@ const LoginForm = () => {
                     <input
                         type="password"
                         id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         className="w-full p-3 border rounded"
                         placeholder="********"
                     />
@@ -40,7 +84,10 @@ const LoginForm = () => {
                         Forgot password?
                     </a>
                 </div>
-                <button className="w-full bg-purple-600 text-white p-3 rounded font-medium mb-4">
+                <button
+                    type="submit"
+                    className="w-full bg-purple-600 text-white p-3 rounded font-medium mb-4"
+                >
                     Sign in
                 </button>
                 <button className="w-full flex justify-center items-center p-3 border rounded text-gray-700">
@@ -51,6 +98,7 @@ const LoginForm = () => {
                     />
                     Sign in with Google
                 </button>
+                {formError && <p className="text-red-500 mt-4">{formError}</p>}
             </form>
             <p className="mt-4 text-center text-sm">
                 Don't have an account?{" "}

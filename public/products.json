@@ -23,7 +23,12 @@
         "price": "$0.89",
         "oldPrice": "$1.78",
         "discount": "50%",
-        "imageUrl": ["/products/orange.jpg"],
+        "imageUrl": [
+            "/products/orange-1.jpg",
+            "/products/orange-2.jpg",
+            "/products/orange-3.jpg",
+            "/products/orange-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Healthcare"],
@@ -36,7 +41,12 @@
         "price": "$1.50",
         "oldPrice": "$2.15",
         "discount": "31%",
-        "imageUrl": ["/products/Strawberries.jpg"],
+        "imageUrl": [
+            "/products/strawberry-1.jpg",
+            "/products/strawberry-2.jpg",
+            "/products/strawberry-3.jpg",
+            "/products/strawberry-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Baby & Pregnancy", "Healthcare"],
@@ -49,7 +59,12 @@
         "price": "$21.90",
         "oldPrice": "$24.90",
         "discount": "13%",
-        "imageUrl": ["/products/Sliced_strawberries.jpg"],
+        "imageUrl": [
+            "/products/Sliced_Strawberries-1.jpg",
+            "/products/Sliced_Strawberries-2.jpg",
+            "/products/Sliced_Strawberries-3.jpg",
+            "/products/Sliced_Strawberries-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Frozen Foods"],
@@ -61,7 +76,12 @@
         "price": "$0.75",
         "oldPrice": "$1.75",
         "discount": "58%",
-        "imageUrl": ["/products/Peach.jpg"],
+        "imageUrl": [
+            "/products/peach-1.jpg",
+            "/products/peach-2.jpg",
+            "/products/peach-3.jpg",
+            "/products/peach-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Baby & Pregnancy", "Healthcare"]
@@ -72,7 +92,12 @@
         "price": "$0.89",
         "oldPrice": "$1.99",
         "discount": "56%",
-        "imageUrl": ["/products/banana.jpg"],
+        "imageUrl": [
+            "/products/banana-1.jpg",
+            "/products/banana-2.jpg",
+            "/products/banana-3.jpg",
+            "/products/banana-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Baby & Pregnancy", "Healthcare"]
@@ -83,7 +108,12 @@
         "price": "$27.90",
         "oldPrice": "$32.90",
         "discount": "16%",
-        "imageUrl": ["/products/spinach_wrap.jpg"],
+        "imageUrl": [
+            "/products/wraps-1.jpg",
+            "/products/wraps-2.jpg",
+            "/products/wraps-3.jpg",
+            "/products/wraps-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Breakfast & Dairy"]
@@ -94,7 +124,12 @@
         "price": "$19.37",
         "oldPrice": "$21.37",
         "discount": "10%",
-        "imageUrl": ["/products/halloween_caramel.jpg"],
+        "imageUrl": [
+            "/products/caramel_apple-1.jpg",
+            "/products/caramel_apple-2.jpg",
+            "/products/caramel_apple-3.jpg",
+            "/products/caramel_apple-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Biscuits & Snacks"]
@@ -105,7 +140,12 @@
         "price": "$2.99",
         "oldPrice": "$3.99",
         "discount": "26%",
-        "imageUrl": ["/products/eggplant.jpg"],
+        "imageUrl": [
+            "/products/eggplant-1.jpg",
+            "/products/eggplant-2.jpg",
+            "/products/eggplant-3.jpg",
+            "/products/eggplant-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Healthcare"]
@@ -116,7 +156,12 @@
         "price": "$1.50",
         "oldPrice": "$2.99",
         "discount": "50%",
-        "imageUrl": ["/products/Pomegranate.jpg"],
+        "imageUrl": [
+            "/products/pomegranate-1.jpg",
+            "/products/pomegranate-2.jpg",
+            "/products/pomegranate-3.jpg",
+            "/products/pomegranate-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Baby & Pregnancy", "Healthcare"]
@@ -127,7 +172,12 @@
         "price": "$0.50",
         "oldPrice": "$1.99",
         "discount": "75%",
-        "imageUrl": ["/products/lemon.jpg"],
+        "imageUrl": [
+            "/products/lemon-1.jpg",
+            "/products/lemon-2.jpg",
+            "/products/lemon-3.jpg",
+            "/products/lemon-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Healthcare"]
@@ -138,7 +188,12 @@
         "price": "$12.79",
         "oldPrice": "$14.79",
         "discount": "14%",
-        "imageUrl": ["/products/Cauliflower.jpg"],
+        "imageUrl": [
+            "/products/cauliflower-1.jpg",
+            "/products/cauliflower-2.jpg",
+            "/products/cauliflower-3.jpg",
+            "/products/cauliflower-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Healthcare"]
@@ -149,7 +204,12 @@
         "price": "$11.54",
         "oldPrice": "$17.88",
         "discount": "50%",
-        "imageUrl": ["/products/Broccoli.jpg"],
+        "imageUrl": [
+            "/products/broccoli-1.jpg",
+            "/products/broccoli-2.jpg",
+            "/products/broccoli-3.jpg",
+            "/products/broccoli-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Healthcare"]
@@ -160,7 +220,12 @@
         "price": "$2.99",
         "oldPrice": "$4.99",
         "discount": "41%",
-        "imageUrl": ["/products/Blackberries.jpg"],
+        "imageUrl": [
+            "/products/blackberry-1.jpg",
+            "/products/blackberry-2.jpg",
+            "/products/blackberry-3.jpg",
+            "/products/blackberry-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Baby & Pregnancy", "Healthcare"]
@@ -171,7 +236,12 @@
         "price": "$11.99",
         "oldPrice": "$12.99",
         "discount": "8%",
-        "imageUrl": ["/products/Protein_Shake.jpg"],
+        "imageUrl": [
+            "/products/salted_caramel-1.jpg",
+            "/products/salted_caramel-2.jpg",
+            "/products/salted_caramel-3.jpg",
+            "/products/salted_caramel-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Breakfast & Dairy", "Beverages"]
@@ -182,18 +252,12 @@
         "price": "$9.88",
         "oldPrice": "$15.99",
         "discount": "17%",
-        "imageUrl": ["/products/green_apple.jpg"],
-        "isInStock": true,
-        "rating": 3,
-        "category": ["Fruits & Vegetables", "Healthcare"]
-    },
-    {
-        "id": 17,
-        "name": "Fresh Granny Smith Apple,Each",
-        "price": "$9.88",
-        "oldPrice": "$15.99",
-        "discount": "17%",
-        "imageUrl": ["/products/pomegranate-2.jpg"],
+        "imageUrl": [
+            "/products/green-apple-1.jpg",
+            "/products/green-apple-2.jpg",
+            "/products/green-apple-3.jpg",
+            "/products/green-apple-4.jpg"
+        ],
         "isInStock": true,
         "rating": 3,
         "category": ["Fruits & Vegetables", "Healthcare"]

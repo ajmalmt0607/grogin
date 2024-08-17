@@ -1,6 +1,5 @@
 import React from "react";
 import { FaHeart, FaShareAlt, FaExchangeAlt } from "react-icons/fa";
-import { PiHeartDuotone } from "react-icons/pi";
 
 const ProductActions = ({ isInWishlist, handleWishlistClick }) => {
     return (

@@ -110,7 +110,7 @@ const ProductList = ({
                 selectedColors.length > 0 ||
                 selectedBrands.length > 0
                     ? "mt-0"
-                    : "mt-8"
+                    : "mt-6"
             } flex-col pl-5 w-[906px]`}
         >
             {/* Display Selected Filters */}
@@ -120,18 +120,18 @@ const ProductList = ({
                 <div className="flex flex-wrap gap-2 mb-2">
                     <button
                         onClick={handleClearAll}
-                        className="flex items-center bg-gray-200 text-gray-700 px-2 py-1 rounded-md text-xs font-bold"
+                        className="flex items-center text-gray-700 rounded-md text-xs font-bold"
                     >
-                        Clear All
+                        Clear filters <FaTimes className="ml-1" />
                     </button>
                     {selectedCategories.map((category) => (
                         <div
                             key={category}
-                            className="flex items-center bg-orange-200 text-orange-800 px-2 py-1 rounded-md text-xs"
+                            className="flex items-center  text-gray-500 font-medium rounded-md text-xs"
                         >
                             <span>{category}</span>
                             <FaTimes
-                                className="ml-2 cursor-pointer"
+                                className="ml-1 cursor-pointer"
                                 onClick={() =>
                                     handleRemoveFilter("category", category)
                                 }
@@ -141,11 +141,11 @@ const ProductList = ({
                     {selectedColors.map((color) => (
                         <div
                             key={color}
-                            className="flex items-center bg-blue-200 text-blue-800 px-2 py-1 rounded-md text-xs"
+                            className="flex items-center text-gray-500 font-medium rounded-md text-xs"
                         >
                             <span>{color}</span>
                             <FaTimes
-                                className="ml-2 cursor-pointer"
+                                className="ml-1 cursor-pointer"
                                 onClick={() =>
                                     handleRemoveFilter("color", color)
                                 }
@@ -155,11 +155,11 @@ const ProductList = ({
                     {selectedBrands.map((brand) => (
                         <div
                             key={brand}
-                            className="flex items-center bg-green-200 text-green-800 px-2 py-1 rounded-md text-xs"
+                            className="flex items-center text-gray-500 font-medium rounded-md text-xs"
                         >
                             <span>{brand}</span>
                             <FaTimes
-                                className="ml-2 cursor-pointer"
+                                className="ml-1 cursor-pointer"
                                 onClick={() =>
                                     handleRemoveFilter("brand", brand)
                                 }

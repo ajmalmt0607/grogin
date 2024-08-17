@@ -16,6 +16,7 @@ import {
     addToWishlist,
     removeFromWishlist,
 } from "../../../features/wishlist/wishlistSlice";
+import RelatedProducts from "./_components/RelatedProducts";
 
 const SingleProducts = () => {
     const { id } = useParams();
@@ -23,24 +24,27 @@ const SingleProducts = () => {
     const [activeImg, setActiveImage] = useState(null);
     const [amount, setAmount] = useState(1);
     const [loading, setLoading] = useState(true);
-    const [singleproduct, setSingleproduct] = useState([]);
+    const [singleProduct, setSingleProduct] = useState(null);
+    const [relatedProducts, setRelatedProducts] = useState([]);
+    const [isHovering, setIsHovering] = useState(false);
+    const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
 
     const dispatch = useDispatch();
     const wishlist = useSelector((state) => state.wishlist);
-    const isInWishlist = wishlist.some((item) => item.id === singleproduct.id);
+    const isInWishlist = wishlist.some((item) => item.id === singleProduct?.id);
 
     const handleWishlistClick = (event) => {
         event.stopPropagation();
         if (isInWishlist) {
-            dispatch(removeFromWishlist(singleproduct));
+            dispatch(removeFromWishlist(singleProduct));
         } else {
-            dispatch(addToWishlist(singleproduct));
+            dispatch(addToWishlist(singleProduct));
         }
     };
 
     const handleAddToCart = () => {
         const productWithQuantity = {
-            ...singleproduct,
+            ...singleProduct,
             quantity: amount,
         };
         dispatch(addToCart(productWithQuantity));
@@ -49,7 +53,7 @@ const SingleProducts = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
 
-        const fetchProductImages = async () => {
+        const fetchProductData = async () => {
             try {
                 const response = await fetch("/products.json");
                 if (!response.ok) {
@@ -57,7 +61,8 @@ const SingleProducts = () => {
                 }
                 const products = await response.json();
                 const product = products.find((p) => p.id === parseInt(id));
-                setSingleproduct(product);
+                setSingleProduct(product);
+
                 if (product) {
                     const productImages = product.imageUrl;
                     const duplicatedImages =
@@ -66,32 +71,78 @@ const SingleProducts = () => {
                             : productImages;
                     setImages(duplicatedImages);
                     setActiveImage(duplicatedImages[0]);
+
+                    // Filter related products based on category overlap
+                    const related = products.filter(
+                        (p) =>
+                            p.category.some((cat) =>
+                                product.category.includes(cat)
+                            ) && p.id !== product.id
+                    );
+                    setRelatedProducts(related);
                 } else {
                     throw new Error("Product not found");
                 }
             } catch (error) {
-                console.error("Failed to fetch product images:", error);
+                console.error("Failed to fetch product data:", error);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchProductImages();
+        fetchProductData();
     }, [id]);
+
+    const handleMouseEnter = () => {
+        setIsHovering(true);
+    };
+
+    const handleMouseMove = (e) => {
+        const rect = e.target.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        setZoomPosition({ x, y });
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovering(false);
+    };
 
     return (
         <>
             <Header />
             <div className="flex xs:px-40 px-20 flex-col pt-5 pb-10 justify-between lg:flex-row gap-16">
-                <div className="flex flex-col gap-6 lg:w-2/4">
+                <div className="flex flex-col gap-6 lg:w-2/4 relative">
                     {loading ? (
                         <Skeleton width={350} height={350} />
                     ) : (
-                        <img
-                            src={activeImg}
-                            alt=""
-                            className="w-[350px] h-[350px] aspect-square object-cover rounded-lg"
-                        />
+                        <>
+                            <img
+                                src={activeImg}
+                                alt=""
+                                className="w-[350px] h-[350px] aspect-square object-cover rounded-lg"
+                                onMouseEnter={handleMouseEnter}
+                                onMouseMove={handleMouseMove}
+                                onMouseLeave={handleMouseLeave}
+                            />
+                            {isHovering && (
+                                <div
+                                    className="absolute border border-gray-300 rounded-lg bg-white overflow-hidden"
+                                    style={{
+                                        width: "450px",
+                                        height: "350px",
+                                        backgroundRepeat: "no-repeat",
+                                        top: "0",
+                                        left: "370px",
+                                        backgroundImage: `url(${activeImg})`,
+                                        backgroundSize: "700px 700px",
+                                        backgroundPosition: `-${
+                                            zoomPosition.x * 1.2
+                                        }px -${zoomPosition.y * 1.2}px`,
+                                    }}
+                                />
+                            )}
+                        </>
                     )}
                     <div className="flex flex-row justify-between w-[480px] h-24">
                         {loading
@@ -122,7 +173,7 @@ const SingleProducts = () => {
                         <>
                             <div className="mb-4">
                                 <h1 className="text-3xl font-bold">
-                                    {singleproduct.name}
+                                    {singleProduct?.name}
                                 </h1>
                             </div>
                             <div className="flex items-center text-sm space-x-2 pb-[10px] mb-5 border-b">
@@ -131,7 +182,7 @@ const SingleProducts = () => {
                                         <FaStar
                                             key={index}
                                             className={`${
-                                                index < singleproduct.rating
+                                                index < singleProduct?.rating
                                                     ? "text-yellow-500"
                                                     : "text-gray-300"
                                             }`}
@@ -139,7 +190,7 @@ const SingleProducts = () => {
                                     ))}
                                 </div>
                                 <span className="text-gray-900 font-semibold px-[5px] py-[1px] border border-gray-300 rounded-[6px]">
-                                    {singleproduct.rating}
+                                    {singleProduct?.rating}
                                 </span>
                                 <span className="text-gray-600 text-[12px] font-normal">
                                     2
@@ -160,14 +211,14 @@ const SingleProducts = () => {
                             </p>
                             <div className="flex items-center mb-2">
                                 <span className="text-[30px] font-bold text-red-600 mr-3">
-                                    {singleproduct.price}
+                                    {singleProduct?.price}
                                 </span>
                                 <span className="text-[22px] font-semibold line-through text-black">
-                                    {singleproduct.oldPrice}
+                                    {singleProduct?.oldPrice}
                                 </span>
                             </div>
                             <button className="bg-green-600 mb-4 text-white text-[14px] font-bold py-3 px-1 rounded-[8px] w-[160px]">
-                                Order on whatsApp
+                                Order on WhatsApp
                             </button>
                             <SpecialOfferCountdown />
                             <div className="flex flex-row items-center mt-4 gap-4">
@@ -195,7 +246,8 @@ const SingleProducts = () => {
                                     </button>
                                 </div>
                                 <button
-                                    className="bg-green-600 text-white text-[14px] font-bold py-3 px-8 rounded-[8px] h-full"
+                                    className="bg-green-600 text-white text-[14px] font-bold py-3 px-8 rounded-[8px
+                                    h-full"
                                     onClick={handleAddToCart}
                                 >
                                     Add to Cart
@@ -214,6 +266,12 @@ const SingleProducts = () => {
                 </div>
             </div>
             <ProductDetails />
+            {!loading && singleProduct && relatedProducts.length > 0 && (
+                <RelatedProducts
+                    relatedProducts={relatedProducts}
+                    selectedIcon="grid"
+                />
+            )}
             <Footer />
         </>
     );

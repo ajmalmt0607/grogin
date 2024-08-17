@@ -18,7 +18,7 @@ const OrdersHeader = () => {
             <div className="flex-grow ">
                 <span className="text-gray-600 pl-4 border-l-2">
                     We deliver to you every day from{" "}
-                    <span className="text-orange-600 font-medium">
+                    <span className="text-orange-600 font-bold">
                         7:00 to 23:00
                     </span>
                 </span>

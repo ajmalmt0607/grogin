@@ -34,7 +34,7 @@ const Wishlist = () => {
                             >
                                 <div className="flex">
                                     <img
-                                        src={item.imageUrl}
+                                        src={item.imageUrl[0]}
                                         alt={item.name}
                                         className="w-20 h-20 object-cover mr-4"
                                     />
