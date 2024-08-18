@@ -52,7 +52,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="flex items-center justify-between xs:px-40 px-20 py-2 border-b bg-white shadow relative">
+        <nav className="flex relative items-center justify-between xs:px-40 px-20 py-2 border-b bg-white shadow">
             <div className="flex items-center space-x-4">
                 <Link to="/">
                     <img
@@ -102,7 +102,7 @@ const Navbar = () => {
                 </form>
             </div>
             <div className="flex items-center space-x-8">
-                <div className="relative flex flex-col items-center">
+                <div className="flex flex-col items-center">
                     <div
                         className="flex flex-col items-center cursor-pointer"
                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -113,7 +113,7 @@ const Navbar = () => {
                         </span>
                     </div>
                     {isDropdownOpen && (
-                        <div className="absolute top-full xs:right-32 right-11 rounded-lg bg-violet-300 w-60 p-3 border border-gray-300 shadow-lg">
+                        <div className="absolute top-full xs:right-28 right-10 rounded-lg bg-violet-300 w-60 p-3 border border-gray-300 shadow-lg">
                             <div className="flex items-center space-x-2 mb-2">
                                 <FaCircleUser
                                     className="text-black"
